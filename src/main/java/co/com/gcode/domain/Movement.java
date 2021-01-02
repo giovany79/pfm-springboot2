@@ -4,16 +4,18 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.Date;
+import java.sql.Timestamp;
+
 
 @Data
 @Builder(toBuilder = true)
 @AllArgsConstructor
 public class Movement {
 
-    public String description;
-    public double ammount;
-    public String category;
-    public Date date;
+    private int id;
+    private String description;
+    private double ammount;
+    private String category;
+    private Timestamp timestamp;
 
 }

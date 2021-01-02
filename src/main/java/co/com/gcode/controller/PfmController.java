@@ -1,13 +1,14 @@
 package co.com.gcode.controller;
 
 import co.com.gcode.domain.Movement;
+import co.com.gcode.repository.MovementRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
+
 import java.util.List;
 
 @RestController
@@ -16,12 +17,34 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PfmController {
 
-    @GetMapping(path= "/list")
-    public List<Movement> AllMovements(){
+    private final MovementRepository movementRepository;
 
-        return Arrays.asList(
-                Movement.builder().description("Pago Servicios").ammount(150000).category("Servicios Publicos").build(),
-                Movement.builder().description("Netflix").ammount(32000).category("Entretenimiento").build(),
-                Movement.builder().description("Motilada").ammount(20000).category("Presentacion Personal").build());
+    @GetMapping(path= "/movements")
+    public ResponseEntity<List<Movement>> allMovements(){
+        return  ResponseEntity.ok(movementRepository.getAllMovements());
+    }
+
+    @GetMapping(path="/movement/{id}")
+    public ResponseEntity<Movement> findById(@PathVariable int id){
+
+        return ResponseEntity.ok(movementRepository.findById(id));
+    }
+
+
+    @PostMapping(path="/movement")
+    public ResponseEntity<Movement> save(@RequestBody Movement movement){
+        return  ResponseEntity.ok(movementRepository.save(movement));
+    }
+
+    @DeleteMapping(path="/movement/{id}")
+    public ResponseEntity<Void> delete(@PathVariable int id){
+        movementRepository.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping(path="/movement/{id}")
+    public ResponseEntity<Void> uptade(@RequestBody Movement movement){
+        movementRepository.update(movement);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
