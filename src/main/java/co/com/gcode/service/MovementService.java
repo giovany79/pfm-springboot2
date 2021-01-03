@@ -2,24 +2,20 @@ package co.com.gcode.service;
 
 import co.com.gcode.domain.Movement;
 import co.com.gcode.repository.MovementRepository;
-import co.com.gcode.util.Util;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.server.ResponseStatusException;
 
 
-import java.sql.Timestamp;
 import java.util.List;
 
-@Service
+@Repository
 @RequiredArgsConstructor
 public class MovementService {
 
 
     private final MovementRepository movementRepository;
-    private static Timestamp timestamp;
-    private final Util util;
 
 
     public List<Movement> getAllMovements(){
@@ -42,6 +38,10 @@ public class MovementService {
     public void update(Movement movement){
         movementRepository.save(movement);
 
+    }
+
+    public List<Movement> findByName(String name){
+        return movementRepository.findByName(name);
     }
 
 }

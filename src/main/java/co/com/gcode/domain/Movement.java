@@ -22,7 +22,7 @@ public class Movement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String description;
+    private String name;
     private double ammount;
     private String category;
     private Timestamp timestamp;

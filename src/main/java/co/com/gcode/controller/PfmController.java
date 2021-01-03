@@ -17,34 +17,39 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PfmController {
 
-    private final MovementService movementRepository;
+    private final MovementService movementservice;
 
     @GetMapping(path= "/movements")
     public ResponseEntity<List<Movement>> allMovements(){
-        return  ResponseEntity.ok(movementRepository.getAllMovements());
+        return  ResponseEntity.ok(movementservice.getAllMovements());
     }
 
     @GetMapping(path="/movement/{id}")
     public ResponseEntity<Movement> findById(@PathVariable int id){
 
-        return ResponseEntity.ok(movementRepository.findById(id));
+        return ResponseEntity.ok(movementservice.findById(id));
     }
 
 
     @PostMapping(path="/movement")
     public ResponseEntity<Movement> save(@RequestBody Movement movement){
-        return  ResponseEntity.ok(movementRepository.save(movement));
+        return  ResponseEntity.ok(movementservice.save(movement));
     }
 
     @DeleteMapping(path="/movement/{id}")
     public ResponseEntity<Void> delete(@PathVariable int id){
-        movementRepository.delete(id);
+        movementservice.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping(path="/movement/{id}")
     public ResponseEntity<Void> uptade(@RequestBody Movement movement){
-        movementRepository.update(movement);
+        movementservice.update(movement);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(path="movement/find")
+    public ResponseEntity<List<Movement>> findByName(@RequestParam(value="name")String name){
+        return ResponseEntity.ok(movementservice.findByName(name));
     }
 }

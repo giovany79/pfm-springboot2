@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface MovementRepository extends JpaRepository<Movement, Integer> {
 
-    //List<Movement> findByName(String name);
+    List<Movement> findByName(String name);
 }
