@@ -1,7 +1,7 @@
 package co.com.gcode.controller;
 
 import co.com.gcode.domain.Movement;
-import co.com.gcode.repository.MovementRepository;
+import co.com.gcode.service.MovementService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PfmController {
 
-    private final MovementRepository movementRepository;
+    private final MovementService movementRepository;
 
     @GetMapping(path= "/movements")
     public ResponseEntity<List<Movement>> allMovements(){
