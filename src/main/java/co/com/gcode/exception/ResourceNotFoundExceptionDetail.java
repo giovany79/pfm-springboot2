@@ -10,8 +10,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder
-//@SuperBuilder
-public class ResourceNotFoundDetailException{
+public class ResourceNotFoundExceptionDetail{
     private String title;
     private int status;
     private String detail;
