@@ -1,12 +1,10 @@
 package co.com.gcode.service;
 
 import co.com.gcode.domain.Movement;
+import co.com.gcode.exception.ResourceNotFoundException;
 import co.com.gcode.repository.MovementRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.server.ResponseStatusException;
-
 
 import java.util.List;
 
@@ -32,7 +30,7 @@ public class MovementService {
 
     public Movement findById(int id){
         return movementRepository.findById(id)
-                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Movement Not Found"));
+                .orElseThrow(()-> new ResourceNotFoundException("Movement Not Found"));
     }
 
     public void update(Movement movement){
@@ -41,6 +39,7 @@ public class MovementService {
     }
 
     public List<Movement> findByName(String name){
+
         return movementRepository.findByName(name);
     }
 

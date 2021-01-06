@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -32,7 +33,7 @@ public class PfmController {
 
 
     @PostMapping(path="/movement")
-    public ResponseEntity<Movement> save(@RequestBody Movement movement){
+    public ResponseEntity<Movement> save(@RequestBody @Valid Movement movement){
         return  ResponseEntity.ok(movementservice.save(movement));
     }
 
