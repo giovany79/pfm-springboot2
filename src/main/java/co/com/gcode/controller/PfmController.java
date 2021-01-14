@@ -4,6 +4,8 @@ import co.com.gcode.domain.Movement;
 import co.com.gcode.service.MovementService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +23,8 @@ public class PfmController {
     private final MovementService movementservice;
 
     @GetMapping(path= "/movements")
-    public ResponseEntity<List<Movement>> allMovements(){
-        return  ResponseEntity.ok(movementservice.getAllMovements());
+    public ResponseEntity<Page<Movement>> allMovements(Pageable pageable){
+        return  ResponseEntity.ok(movementservice.getAllMovements(pageable));
     }
 
     @GetMapping(path="/movement/{id}")

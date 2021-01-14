@@ -4,6 +4,8 @@ import co.com.gcode.domain.Movement;
 import co.com.gcode.exception.ResourceNotFoundException;
 import co.com.gcode.repository.MovementRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,8 +18,9 @@ public class MovementService {
     private final MovementRepository movementRepository;
 
 
-    public List<Movement> getAllMovements(){
-        return movementRepository.findAll();
+    public Page<Movement> getAllMovements(Pageable pageable){
+
+        return movementRepository.findAll(pageable);
     }
 
     public Movement save(Movement movement){
