@@ -5,6 +5,8 @@ server:
 
 
 spring:
+  application:
+    name: springboot-pfm
   datasource:
     url: jdbc:mysql://localhost:3306/movement
     username: root
@@ -28,5 +30,5 @@ management:
   endpoints:
     web:
       exposure:
-        include: "*"
+        include: info, health, metrics, prometheus
 
